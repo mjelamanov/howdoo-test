@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckDocumentNotEmpty;
 use Illuminate\Http\Request;
 
 /*
@@ -13,6 +14,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
+
+    Route::resource('document', 'DocumentController')->except(['create', 'edit', 'destroy']);
+    Route::post('document/{document}/publish', 'DocumentController@publish')
+        ->name('document.publish')
+        ->middleware(CheckDocumentNotEmpty::class);
+
 });
