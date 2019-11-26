@@ -14,7 +14,12 @@ class Document extends Model
     /**
      * @var array
      */
-    protected $fillable = ['status', 'payload'];
+    protected $fillable = ['status', 'payload', 'user_id'];
+
+    /**
+     * @var array
+     */
+    protected $hidden = ['user_id'];
 
     /**
      * @var array
