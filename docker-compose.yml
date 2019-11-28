@@ -1,0 +1,23 @@
+version: "3"
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: 123456
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DB_PASSWORD: 123456
+      DB_PORT: 3306
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/home/backend/app/
+    depends_on:
+      - db
+    links:
+      - db
