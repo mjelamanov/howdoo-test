@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        HowDoo\Auth\ServiceProvider::class,
 
         /*
          * Application Service Providers...

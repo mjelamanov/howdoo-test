@@ -4,6 +4,7 @@
 
 use App\Document;
 use App\Enums\DocumentStatus;
+use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(Document::class, function (Faker $faker) {
@@ -22,6 +23,9 @@ $factory->define(Document::class, function (Faker $faker) {
                 ],
             ],
         ],
+        'user_id' => function() {
+            return factory(User::class)->create();
+        },
     ];
 });
 

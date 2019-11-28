@@ -12,5 +12,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(DocumentsTableSeeder::class);
+        $this->call(ApiTokensTableSeeder::class);
     }
 }
