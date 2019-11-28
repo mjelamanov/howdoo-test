@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
 
+    Route::post('login', 'LoginController@login')->name('api.login');
+
     Route::middleware('auth:api')->group(function () {
         Route::post('document', 'DocumentController@store')->name('document.store');
         Route::put('document/{document}', 'DocumentController@update')->name('document.update');
