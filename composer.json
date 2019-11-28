@@ -37,7 +37,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "HowDoo\\Auth\\": "packages/auth/src"
         },
         "classmap": [
             "database/seeds",
@@ -46,7 +47,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "HowDoo\\Auth\\": "packages/auth/tests"
         }
     },
     "minimum-stability": "dev",
