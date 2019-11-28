@@ -64,13 +64,21 @@ class DocumentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         $this->connection->beginTransaction();
 
-        $document = $this->repository->create(['status' => DocumentStatus::DRAFT(), 'payload' => []]);
+        $user = $request->user('api');
+
+        $document = $this->repository->create([
+            'status' => DocumentStatus::DRAFT(),
+            'payload' => [],
+            $user->getForeignKey() => $user->getKey(),
+        ]);
 
         $this->connection->commit();
 
