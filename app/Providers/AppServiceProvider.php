@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\ApiTokenRepository;
+use App\Repositories\ApiTokenRepositoryEloquent;
 use App\Repositories\DocumentRepository;
 use App\Repositories\DocumentRepositoryEloquent;
 use App\Repositories\UserRepository;
@@ -19,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(DocumentRepository::class, DocumentRepositoryEloquent::class);
         $this->app->bind(UserRepository::class, UserRepositoryEloquent::class);
+        $this->app->bind(ApiTokenRepository::class, ApiTokenRepositoryEloquent::class);
     }
 
     /**
