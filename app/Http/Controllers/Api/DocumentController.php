@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Criteria\DocumentOrderedByLatestCriteria;
+use App\Criteria\OnlyPublishedDocumentsCriteria;
+use App\Criteria\SelectUserDocumentsCriteria;
 use App\Document;
 use App\Enums\DocumentStatus;
 use App\Http\Controllers\Controller;
@@ -46,7 +49,14 @@ class DocumentController extends Controller
      */
     public function index(Request $request)
     {
-        $items = $this->repository->paginate($request->input('perPage', config('document.per_page')));
+        if ($user = $request->user('api')) {
+            $repository = $this->repository->pushCriteria(new SelectUserDocumentsCriteria($user));
+        } else {
+            $repository = $this->repository->pushCriteria(new OnlyPublishedDocumentsCriteria());
+        }
+
+        $items = $repository->pushCriteria(new DocumentOrderedByLatestCriteria())
+            ->paginate($request->input('perPage', config('document.per_page')));
 
         return DocumentCollection::make($items);
     }
